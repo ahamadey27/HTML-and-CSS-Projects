@@ -5,3 +5,8 @@ p
 	text-align: center;
 	background: Tomato:
 }
+
+h1
+{
+	text-shadow: 2px 2px red; 
+}
