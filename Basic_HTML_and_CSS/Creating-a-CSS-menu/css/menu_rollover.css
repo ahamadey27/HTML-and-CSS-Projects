@@ -27,7 +27,7 @@ body {
     list-style: none;
 }
 
-.menu li{
+.menu li {
     color: #B3B3B3; 
     display: inline-block;
     margin-right: -2px;
@@ -44,14 +44,15 @@ body {
     color: #fff
 }
 
-.menu li:hover{
+.menu li:hover ul {
     display: block;
     opacity: 1; 
     /*While hovered, dropdown menu appears
     This also avoids a block-level bug */
+    visibility: visible;
 }
 
-.submenu{
+.submenu {
     padding: 0;
     left: 0;
     position: absolute;
@@ -63,13 +64,13 @@ body {
     visibility: hidden;
 }
 
-.submenu li{
+.submenu li {
     background-color: #387593;
     display: block;
     color: #B3B3B3;
 }
 
-.submenu li:hover{
+.submenu li:hover {
     color: #fff;
     background-color: #5EAFDF;
 }
