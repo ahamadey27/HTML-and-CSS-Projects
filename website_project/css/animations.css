@@ -82,6 +82,10 @@
     cursor: pointer;
 }
 
+.photo-overlay:hover {
+    opacity: 1;
+}
+
 .photo img {
     transition: tranform .5s;
     transform-origin: 50% 50%;
