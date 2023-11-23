@@ -1,17 +1,9 @@
-USE db_zoo;
+USE db_zoo2
 
--- Use your database
-USE db_zoo;
+CREATE PROC createZoodb
+AS
+BEGIN
 
--- Drop existing tables if they exist
-DROP TABLE IF EXISTS tbl_species;
-DROP TABLE IF EXISTS tbl_specialist;
-DROP TABLE IF EXISTS tbl_habitat;
-DROP TABLE IF EXISTS tbl_nutrition;
-DROP TABLE IF EXISTS tbl_care;
-DROP TABLE IF EXISTS tbl_order;
-DROP TABLE IF EXISTS tbl_class;
-DROP TABLE IF EXISTS tbl_animalia;
 
 CREATE TABLE tbl_animalia (
 	animalia_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
@@ -24,14 +16,11 @@ INSERT INTO tbl_animalia
 		('vertebrate'),
 		('invertebrate')
 ; 
-SELECT * FROM tbl_animalia;
-
 
 CREATE TABLE tbl_class (
     class_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
     class_type VARCHAR(50) NOT NULL
 );
-
 
 
 INSERT INTO tbl_class
@@ -46,8 +35,6 @@ INSERT INTO tbl_class
     ('cnidaria'),    
     ('echinoderm')
 ;
-SELECT * FROM tbl_class;
-
 
 CREATE TABLE tbl_order (
 	order_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
@@ -86,7 +73,6 @@ INSERT INTO tbl_order
 	('herbivore'),
 	('omnivore')
 ;
-SELECT * FROM tbl_order;  
 
 INSERT INTO tbl_care
 	(care_id, care_type, care_specialist)
@@ -99,8 +85,7 @@ INSERT INTO tbl_care
 	('care_5', 'goof around', 3),
 	('care_6', 'throw ball', 1),
 	('care_7', 'wrestle', 3)
-;
-SELECT * FROM tbl_care; 
+; 
 
 INSERT INTO tbl_nutrition 
 	(nutrition_type, nutrition_cost)
@@ -114,7 +99,6 @@ INSERT INTO tbl_nutrition
 	('sardines', 1300),
 	('grain', 500)
 ;
-SELECT * FROM tbl_nutrition; 
 
 INSERT INTO tbl_habitat
 	(habitat_type, habitat_cost)
@@ -128,7 +112,6 @@ INSERT INTO tbl_habitat
 	('salt water', 8300),
 	('cement', 5500)
 ;
-SELECT * FROM tbl_habitat; 
 
 INSERT INTO tbl_specialist
 	(specialist_fname, specialist_lname, specialist_contact)
@@ -139,7 +122,6 @@ INSERT INTO tbl_specialist
 	('sara', 'billard', '659-657-3495'),
 	('tom', 'bryant', '454-267-9526')
 ;
-SELECT * FROM tbl_specialist;
 
 CREATE TABLE tbl_species(
     species_id INT PRIMARY KEY NOT NULL IDENTITY (1,1),
@@ -151,7 +133,6 @@ CREATE TABLE tbl_species(
     species_nutrition INT NOT NULL CONSTRAINT fk_nutrition_id FOREIGN KEY REFERENCES tbl_nutrition(nutrition_id) ON UPDATE CASCADE ON DELETE CASCADE,
     species_care VARCHAR(50) NOT NULL CONSTRAINT fk_care_id FOREIGN KEY REFERENCES tbl_care(care_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
-SELECT * FROM tbl_species;
 
 INSERT INTO tbl_species
     (species_name, species_animalia, species_class, species_order, species_habitat, species_nutrition, species_care)
@@ -165,7 +146,6 @@ INSERT INTO tbl_species
     ('bobcat', 1, 2, 3, 5001, 2204, 'care_5'),
     ('grey wolf', 1, 3, 3, 5003, 2201, 'care_4')
 ; 
-SELECT * FROM tbl_species;
 
 SELECT 
 	a1.species_name, a2.animalia_type,
@@ -190,6 +170,8 @@ SELECT
 	WHERE species_name = 'bat'
 ;
 
+SELECT * FROM tbl_nutrition
+INNER JOIN tbl_species ON tbl_species.species_nutrition = tbl_nutrition.nutrition_id;
 
 
 -- Optionally, select data from tables to verify
